@@ -8,6 +8,7 @@ data class Data(val a: Int, val b: String = "42")
 
 class SerializationTest {
     @Test
+    @OptIn(kotlinx.serialization.ExperimentalSerializationApi::class)
     fun testSerialization() {
         // Json also has .Default configuration which provides more reasonable settings,
         // but is subject to change in future versions
