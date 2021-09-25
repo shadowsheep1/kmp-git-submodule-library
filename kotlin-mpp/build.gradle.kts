@@ -9,14 +9,12 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 val compileJvm = false
 val compileMacOS = false
 
-val rootProjectExt = rootProject.extra
-
 plugins {
     // https://developer.android.com/studio/projects/android-library
     id("com.android.library")
-    id("org.jetbrains.kotlin.multiplatform")
+    kotlin("multiplatform")
     // https://github.com/JetBrains/kotlin-native/blob/master/COCOAPODS.md
-    id("org.jetbrains.kotlin.native.cocoapods")
+    kotlin("native.cocoapods")
     id("com.squareup.sqldelight")
     id("kotlinx-serialization")
     id("org.openapi.generator")
@@ -59,13 +57,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     testOptions.unitTests.isIncludeAndroidResources = true
-}
-
-dependencies {
-    //implementation ("'com.android.support:appcompat-v7:28.0.0")
-    //implementation ("'com.android.support.constraint:constraint-layout:1.1.3")
-    //androidTestImplementation ("com.android.support.test:runner:1.0.2")
-    //implementation("com.squareup.okhttp3:okhttp:${rootProjectExt["ok_http_ver"]}")
 }
 
 group = "it.shadowsheep.kotlin.mpp"

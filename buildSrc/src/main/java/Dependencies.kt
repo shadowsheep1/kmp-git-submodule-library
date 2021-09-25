@@ -2,7 +2,7 @@ import Versions.iosTestTask
 
 object Versions {
     const val iosTestTask = false
-    const val kotlin = "1.6.0-M1"
+    const val kotlin = "1.5.31"
 
     // Gradle
     const val androidGradlePlugin = "7.0.2"
