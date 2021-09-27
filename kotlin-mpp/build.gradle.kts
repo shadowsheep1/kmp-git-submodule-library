@@ -12,9 +12,9 @@ val compileMacOS = false
 plugins {
     // https://developer.android.com/studio/projects/android-library
     id("com.android.library")
-    kotlin("multiplatform")
+    kotlin("multiplatform") version(Versions.kotlin)
     // https://github.com/JetBrains/kotlin-native/blob/master/COCOAPODS.md
-    kotlin("native.cocoapods")
+    kotlin("native.cocoapods") version(Versions.kotlin)
     id("com.squareup.sqldelight")
     id("kotlinx-serialization")
     id("org.openapi.generator")
