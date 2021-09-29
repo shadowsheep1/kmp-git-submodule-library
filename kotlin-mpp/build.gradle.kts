@@ -12,13 +12,30 @@ val compileMacOS = false
 plugins {
     // https://developer.android.com/studio/projects/android-library
     id("com.android.library")
-    kotlin("multiplatform") version(Versions.kotlin)
+    kotlin("multiplatform") //version(Versions.kotlin)
     // https://github.com/JetBrains/kotlin-native/blob/master/COCOAPODS.md
-    kotlin("native.cocoapods") version(Versions.kotlin)
+    kotlin("native.cocoapods") //version(Versions.kotlin)
     id("com.squareup.sqldelight")
     id("kotlinx-serialization")
     id("org.openapi.generator")
+}
 
+val kotlinPluginId = "org.jetbrains.kotlin.multiplatform"
+val hasPlugin = project.plugins.hasPlugin(kotlinPluginId);
+println("kmp: $hasPlugin")
+
+if (hasPlugin) {
+    val plugin: org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper = project.plugins.getPlugin(kotlinPluginId) as org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper
+    println("Plugin already applied - version ${plugin.kotlinPluginVersion}")
+}
+
+val kotlinPluginId2 = "org.jetbrains.kotlin.native.cocoapods"
+val hasPlugin2 = project.plugins.hasPlugin(kotlinPluginId2);
+println("kmp: $hasPlugin2")
+
+if (hasPlugin2) {
+    val plugin: org.jetbrains.kotlin.gradle.plugin.cocoapods.KotlinCocoapodsPlugin = project.plugins.getPlugin(kotlinPluginId2) as org.jetbrains.kotlin.gradle.plugin.cocoapods.KotlinCocoapodsPlugin
+    println("Plugin2 already applied - version ${plugin}")
 }
 
 println("compileSdkVersion: ${Versions.compileSdk}")

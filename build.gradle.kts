@@ -20,6 +20,10 @@ buildscript {
     }
 }
 
+val kotlinPluginId = "org.jetbrains.kotlin.multiplatform"
+val hasPlugin = project.plugins.hasPlugin(kotlinPluginId);
+println("kmp: $hasPlugin")
+
 allprojects {
     repositories {
         google()
