@@ -13,12 +13,12 @@ object Versions {
     const val minSdk = 23
     const val targetSdk = compileSdk
 
-    const val sqldelight = "1.5.1"
+    const val sqldelight = "1.5.3"
     const val settings = "0.8"
     const val serialization = "1.2.2"
     // https://kotlinlang.org/docs/mobile/concurrency-and-coroutines.html#multithreaded-coroutines
     const val coroutines = "1.5.1-native-mt"
-    const val ktor = "1.6.3"
+    const val ktor = "1.6.5"
     const val openapigen = "5.2.1"
 }
 

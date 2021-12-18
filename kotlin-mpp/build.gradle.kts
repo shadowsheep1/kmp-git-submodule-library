@@ -100,18 +100,11 @@ sqldelight {
 kotlin {
     //select iOS target platform depending on the Xcode environment variables
     val podTarget = project.findProperty("kotlin.native.cocoapods.target")
-    val buildForDevices = podTarget == "ios_arm"
     println("--------> pod target $podTarget")
     println("--------> sdk_name ${System.getenv("SDK_NAME")}")
-    println("--------> build for devices $buildForDevices")
 
-    val iosTarget: (String) -> KotlinNativeTarget = when {
-        System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
-        else -> ::iosX64
-    }
-
-    iosTarget("ios")
+    ios()
+    iosSimulatorArm64()
 
     targets.matching { it.platformType.name == "native" }.all {
         // https://github.com/JetBrains/kotlin-native/issues/3208
