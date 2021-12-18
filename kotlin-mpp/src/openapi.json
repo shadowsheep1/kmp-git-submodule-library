@@ -6,11 +6,11 @@
     "version" : "1.0.0"
   },
   "servers" : [ {
-    "url" : "https://shadowsheep.free.beeceptor.com/",
+    "url" : "https://www.versionestabile.it/_sw/so",
     "variables" : { }
   } ],
   "paths" : {
-    "/" : {
+    "/status" : {
       "get" : {
         "summary" : "Get status",
         "description" : "Get status",
