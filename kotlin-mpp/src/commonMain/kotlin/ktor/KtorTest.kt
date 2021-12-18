@@ -8,6 +8,7 @@ import it.shadowsheep.kotlin.mpp.app.client.infrastructure.HttpResponse
 import kotlinx.coroutines.*
 import kotlinx.serialization.json.Json
 import kotlin.coroutines.CoroutineContext
+import kotlin.native.concurrent.ThreadLocal
 
 internal expect val ApplicationDispatcher: CoroutineContext
 
@@ -36,10 +37,7 @@ open class CoroutinePresenter(
 expect fun clientEngine(timeout: Int = 5): HttpClientEngine
 
 class ApiService(
-    timeout: Int = 5,
-    staging: Boolean = false,
-    test: Boolean = false,
-    devBranch: String = ""
+    timeout: Int = 5
 ) {
     val defaultApi = DefaultApi(
         httpClientEngine = clientEngine(timeout),
