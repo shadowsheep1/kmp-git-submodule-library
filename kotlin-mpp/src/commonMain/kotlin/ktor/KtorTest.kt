@@ -173,7 +173,7 @@ open class BasePresenter(
         message: String
     ) = returnT(
         BasePresenter.BaseRequestViewState(
-            apiErrorMessage = "Api error!"
+            apiErrorMessage = "Api error! $message"
         )
     )
 
@@ -184,7 +184,7 @@ open class BasePresenter(
     ): T {
         return returnT(
             BaseRequestViewState(
-                apiErrorMessage = "Error!",
+                apiErrorMessage = "Error! $statusCode $headers",
                 statusCode = statusCode
             )
         )
