@@ -235,36 +235,6 @@ kotlin {
         //api(Deps.ktor.mock.native)
     }
 
-    if (compileJvm) {
-        jvm()
-
-        sourceSets["jvmMain"].dependencies {
-            implementation(kotlin("tstdlib-jdk8"))
-        }
-
-        sourceSets["jvmTest"].dependencies {
-            implementation(kotlin("test"))
-            implementation(kotlin("test-junit"))
-        }
-    }
-
-    if (compileMacOS) {
-        // For ARM, should be changed to iosArm32 or iosArm64
-        // For Linux, should be changed to e.g. linuxX64
-        // For MacOS, should be changed to e.g. macosX64
-        // For Windows, should be changed to e.g. mingwX64
-        macosX64("macos")
-
-        sourceSets["macosMain"].dependencies {
-
-        }
-
-        sourceSets["macosTest"].dependencies {
-            implementation(kotlin("test"))
-            implementation(kotlin("test-junit"))
-        }
-    }
-
     // https://kotlinlang.org/docs/reference/experimental.html
     sourceSets {
         all {
