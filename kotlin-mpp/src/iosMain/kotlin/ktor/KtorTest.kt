@@ -3,6 +3,7 @@ package ktor
 import io.ktor.client.engine.*
 import io.ktor.client.engine.ios.*
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Runnable
 import platform.Foundation.setValue
 import kotlin.coroutines.CoroutineContext
@@ -10,13 +11,7 @@ import kotlin.coroutines.CoroutineContext
 import platform.darwin.dispatch_async
 import platform.darwin.dispatch_get_main_queue
 
-internal actual val ApplicationDispatcher: CoroutineContext = MainDispatcher()
-
-internal class MainDispatcher : CoroutineDispatcher() {
-    override fun dispatch(context: CoroutineContext, block: Runnable) {
-        dispatch_async(dispatch_get_main_queue()) { block.run() }
-    }
-}
+internal actual val ApplicationDispatcher: CoroutineContext = Dispatchers.Main
 
 actual fun clientEngine(timeout: Int): HttpClientEngine {
     //Ios.create() // Default engine
