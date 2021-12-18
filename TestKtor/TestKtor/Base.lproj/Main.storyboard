@@ -24,14 +24,30 @@
                                     <action selector="callApiAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kyG-Yn-cNL"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Mjp-L8-j5E">
+                                <rect key="frame" x="0.0" y="734" width="414" height="128"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="6rV-Q3-PuS"/>
+                                </constraints>
+                                <color key="textColor" systemColor="systemGreenColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Mjp-L8-j5E" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RUk-es-4uK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Mjp-L8-j5E" secondAttribute="trailing" id="jrA-u2-Cfp"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Mjp-L8-j5E" secondAttribute="bottom" id="q44-Hh-tYM"/>
                             <constraint firstItem="kTD-6G-wce" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="v7R-c4-ifa"/>
                             <constraint firstItem="kTD-6G-wce" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zTd-kj-qgW"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="console" destination="Mjp-L8-j5E" id="S40-qI-1w8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -41,6 +57,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     
     private lazy var statusPresenter: StatusPresenter? = StatusPresenter(apiService: apiService)
     
+    @IBOutlet weak var console: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -32,10 +33,12 @@ class ViewController: UIViewController {
                 print("Do nothing")
             },
             completion: { [weak self] viewState in
-                guard let _ = self else { return }
-                print("Error: \(viewState.unexpectedError ?? "")")
-                print("Api Error: \(viewState.apiErrorMessage ?? "")")
-                print("Status: \(viewState.status ?? "")")
+                guard let self = self else { return }
+                var error = viewState.unexpectedError ?? viewState.apiErrorMessage ?? ""
+                print("Error: \(error)")
+                let status = viewState.status ?? ""
+                print("Status: \(status)")
+                self.console.insertText("\(error)\(status)\n")
             }
         )
     }
