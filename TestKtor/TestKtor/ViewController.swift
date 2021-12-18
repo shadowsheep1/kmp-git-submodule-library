@@ -34,7 +34,7 @@ class ViewController: UIViewController {
             },
             completion: { [weak self] viewState in
                 guard let self = self else { return }
-                var error = viewState.unexpectedError ?? viewState.apiErrorMessage ?? ""
+                let error = viewState.unexpectedError ?? viewState.apiErrorMessage ?? ""
                 print("Error: \(error)")
                 let status = viewState.status ?? ""
                 print("Status: \(status)")
