@@ -1,0 +1,45 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Test Ktor Openapi",
+    "description" : "Test Ktor Leaks",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://shadowsheep.free.beeceptor.com/",
+    "variables" : { }
+  } ],
+  "paths" : {
+    "/" : {
+      "get" : {
+        "summary" : "Get status",
+        "description" : "Get status",
+        "operationId" : "getStatus",
+        "responses" : {
+          "200" : {
+            "description" : "Status",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Status"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Status" : {
+        "type" : "object",
+        "properties" : {          
+          "status" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
+}
