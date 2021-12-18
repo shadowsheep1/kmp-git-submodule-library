@@ -5,7 +5,7 @@ Pod::Spec.new do |spec|
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'MBB Mobile and More Kotlin/Native module'
+    spec.summary                  = 'Mobile and More Kotlin/Native module'
 
     spec.vendored_frameworks      = "build/cocoapods/framework/kotlin_mpp.framework"
     spec.libraries                = "c++"

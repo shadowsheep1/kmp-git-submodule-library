@@ -105,15 +105,13 @@ kotlin {
     println("--------> sdk_name ${System.getenv("SDK_NAME")}")
     println("--------> build for devices $buildForDevices")
 
-    val buildForDevice = project.findProperty("kotlin.native.cocoapods.target") == "ios_arm"
-    if (buildForDevice) {
-        iosArm64("ios")
-
-        //iosArm32("ios32")
-        //sourceSets["ios32Main"].dependsOn(sourceSets["iosMain"])
-    } else {
-        iosX64("ios")
+    val iosTarget: (String) -> KotlinNativeTarget = when {
+        System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
+        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
+        else -> ::iosX64
     }
+
+    iosTarget("ios")
 
     targets.matching { it.platformType.name == "native" }.all {
         // https://github.com/JetBrains/kotlin-native/issues/3208
@@ -153,7 +151,7 @@ kotlin {
 
     cocoapods {
         // Configure fields required by CocoaPods.
-        summary = "MBB Mobile and More Kotlin/Native module"
+        summary = "Mobile and More Kotlin/Native module"
         homepage = "https://www.shadowsheep.it"
     }
 
