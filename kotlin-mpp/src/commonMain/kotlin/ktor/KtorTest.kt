@@ -198,3 +198,59 @@ open class BasePresenter(
         this.service.clear()
     }
 }
+
+class StatusPresenter(
+    apiService: ApiService
+) : BasePresenter(apiService) {
+
+    class StatusRequestViewState(
+        apiErrorMessage: String? = null,
+        statusCode: Int? = null,
+        unexpectedError: String? = null,
+        indicatorAnimating: Boolean = false,
+        requestSucceeded: Boolean = false,
+        val status: String? = null,
+    ) : BaseRequestViewState(
+        apiErrorMessage,
+        statusCode,
+        unexpectedError,
+        indicatorAnimating,
+        requestSucceeded
+    ) {
+        constructor(viewState: BaseRequestViewState) : this(
+            apiErrorMessage = viewState.apiErrorMessage,
+            statusCode = viewState.statusCode,
+            unexpectedError = viewState.unexpectedError,
+            indicatorAnimating = viewState.indicatorAnimating,
+            requestSucceeded = viewState.requestSucceeded
+        )
+    }
+
+    //region getStatus
+    fun getStatus(
+        initialViewStateHandler: (StatusRequestViewState) -> Unit,
+        completion: (StatusRequestViewState) -> Unit,
+    ) {
+        launch {
+            val viewState = requestAsync(
+                returnT = {
+                    StatusRequestViewState(
+                        viewState = it
+                    )
+                },
+                initialViewStateHandler = initialViewStateHandler,
+                apiCall = {
+                    it.defaultApi.getStatus()
+                },
+                successfulHandler = {
+                    StatusRequestViewState(
+                        requestSucceeded = true,
+                        status = it.status
+                    )
+                }
+            )
+            completion(viewState)
+        }
+    }
+    //endregion
+}
