@@ -103,8 +103,13 @@ kotlin {
     println("--------> pod target $podTarget")
     println("--------> sdk_name ${System.getenv("SDK_NAME")}")
 
-    ios()
-    iosSimulatorArm64()
+    val iosTarget: (String) -> KotlinNativeTarget = when {
+        System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
+        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
+        else -> ::iosX64
+    }
+
+    iosTarget("ios")
 
     targets.matching { it.platformType.name == "native" }.all {
         // https://github.com/JetBrains/kotlin-native/issues/3208
