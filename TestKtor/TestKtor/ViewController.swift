@@ -39,6 +39,8 @@ class ViewController: UIViewController {
                 let status = viewState.status ?? ""
                 print("Status: \(status)")
                 self.console.insertText("\(error)\(status)\n")
+                let range = NSMakeRange(self.console.text.count - 1, 0)
+                self.console.scrollRangeToVisible(range)
             }
         )
     }
