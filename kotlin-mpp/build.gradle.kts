@@ -21,14 +21,14 @@ plugins {
 
 }
 
-println("compileSdkVersion: ${Versions.compileSdk}")
+println("compileSdkVersion: ${libs.versions.compileSdk}")
 
 // https://github.com/gradle/kotlin-dsl-samples/issues/163
 android {
-    compileSdkVersion(Versions.compileSdk)
+    compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
-        minSdkVersion(Versions.minSdk)
-        targetSdkVersion(Versions.targetSdk)
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -123,7 +123,7 @@ kotlin {
                 println("\t - baseName: ${framework.baseName}")
 
                 // https://github.com/russhwolf/multiplatform-settings/blob/v0.4/sample/shared/build.gradle.kts
-                export(Deps.multiplatformSettings.core.common)
+                export(libs.multiplatformSettings.common)
                 framework.transitiveExport = true
                 framework.embedBitcode = Framework.BitcodeEmbeddingMode.BITCODE
 
@@ -156,7 +156,7 @@ kotlin {
     android()
     //jvm("android")
 
-    println("----> Deps: ${Deps.kotlin.stdlib.common}")
+    println("----> VERSION_CATALOGS -> Deps: ${libs.versions.kotlin.get()}")
 
     // To include open api client code autogenearated by gradle plugin
     sourceSets["commonMain"]
@@ -171,18 +171,18 @@ kotlin {
     sourceSets["commonMain"].dependencies {
         implementation(kotlin("stdlib-common"))
         // SqlDelight
-        implementation(Deps.sqldelight.runtime.common)
+        implementation(libs.sqlDelight.runtime)
         // Multiplatform Settings
-        api(Deps.multiplatformSettings.core.common)
+        api(libs.multiplatformSettings.common)
         // Serialization
         //implementation(Deps.serialization.common)
         // Coroutines
-        implementation(Deps.kotlin.coroutines.common)
+        implementation(libs.coroutines.core)
         // Ktor
         // https://ktor.io/clients/http-client/multiplatform.html
-        api(Deps.ktor.core.common)
-        api(Deps.ktor.json.common)
-        api(Deps.ktor.serialization.common)
+        api(libs.ktor.client.core)
+        api(libs.ktor.client.json)
+        api(libs.ktor.client.serialization)
     }
 
     sourceSets["commonTest"].dependencies {
@@ -190,27 +190,19 @@ kotlin {
         implementation(kotlin("test-common"))
         implementation(kotlin("test-annotations-common"))
         // Multiplatform Settings
-        implementation(Deps.multiplatformSettings.test.common)
+        implementation(libs.multiplatformSettings.test)
         // SqlDelight
-        implementation(Deps.sqldelight.runtime.common)
+        implementation(libs.sqlDelight.runtime)
         // Ktor
-        implementation(Deps.ktor.mock.common)
+        implementation(libs.ktor.client.mock)
     }
 
     sourceSets["androidMain"].dependencies {
         implementation(kotlin("stdlib"))
         // SQLDelight
-        implementation(Deps.sqldelight.driver.android)
-        // Serialization
-        //implementation(Deps.serialization.common)
-        // Coroutines
-        implementation(Deps.kotlin.coroutines.android)
+        implementation(libs.sqlDelight.android)
         // Ktor
-        api(Deps.ktor.client.android)
-        //api(Deps.ktor.client.okhttp))
-        api(Deps.ktor.core.common)
-        api(Deps.ktor.json.jvm)
-        api(Deps.ktor.serialization.jvm)
+        api(libs.ktor.client.android)
     }
 
     sourceSets["androidTest"].dependencies {
@@ -218,19 +210,18 @@ kotlin {
         implementation(kotlin("test-junit"))
         implementation("com.android.support.test:runner:1.0.2")
         // SQLDelight
-        implementation(Deps.sqldelight.driver.sqlite)
+        implementation(libs.sqlDelight.android)
         // Coroutines
-        implementation(Deps.kotlin.coroutines.jdk)
-        implementation(Deps.kotlin.coroutines.android)
+        implementation(libs.coroutines.test)
         // Ktor
-        implementation(Deps.ktor.mock.jvm)
+        implementation(libs.ktor.client.mock)
     }
 
     sourceSets["iosMain"].dependencies {
         // SQLDelight
-        implementation(Deps.sqldelight.driver.ios)
+        implementation(libs.sqlDelight.native)
         // Ktor
-        api(Deps.ktor.client.ios)
+        api(libs.ktor.client.ios)
         // CrashKios - https://github.com/touchlab/CrashKiOS
         api("co.touchlab:crashkios:0.3.1")
     }
@@ -258,7 +249,7 @@ kotlin {
     }
 }
 
-if (Versions.iosTestTask) {
+if (libs.versions.iosTestTask.get().toInt() == 1) {
     task("iosTest") {
         dependsOn("linkDebugTestIos")
         doLast {
