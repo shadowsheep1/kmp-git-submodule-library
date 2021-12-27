@@ -50,5 +50,9 @@ class ViewController: UIViewController {
         statusPresenter = nil
     }
     
+    @IBAction func gcAction(_ sender: Any) {
+        GarbageCollector().collect()
+    }
+    
 }
 

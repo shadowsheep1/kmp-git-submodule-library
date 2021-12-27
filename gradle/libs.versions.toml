@@ -1,6 +1,6 @@
 [versions]
 iosTestTask = "0"
-kotlin = "1.5.31"
+kotlin = "1.6.10"
 
 # Gradle
 androidGradlePlugin = "7.0.2"
@@ -14,11 +14,11 @@ compileSdk = "31"
 
 # Dependencies
 # https://kotlinlang.org/docs/mobile/concurrency-and-coroutines.html#multithreaded-coroutines
-coroutines-native = "1.5.2-native-mt"
+coroutines-native = "1.6.0-native-mt"
 multiplatformSettings = "0.8.1"
-ktor = "1.6.5"
+ktor = "1.6.7"
 sqlDelight = "1.5.3"
-openapiGenerator = "5.2.1"
+openapiGenerator = "5.3.0"
 
 [libraries]
 

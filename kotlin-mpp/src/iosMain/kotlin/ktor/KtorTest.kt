@@ -27,3 +27,25 @@ actual fun clientEngine(timeout: Int): HttpClientEngine {
 }
 
 actual typealias WeakRef<T> = kotlin.native.ref.WeakReference<T>
+
+//region GC
+actual object GarbageCollector {
+    fun collect() {
+        kotlin.native.internal.GC.collect()
+        println("K-side: GC.collect()!")
+    }
+
+    fun printGCInfo() {
+        kotlin.native.internal.GC.let {
+            println(
+                "CG Info: \n"
+                        + "Threshold: ${it.threshold}\n"
+                        + "Threshold Allocations: ${it.thresholdAllocations}\n"
+                        + "Cycles Threshold Enabled: ${it.cyclicCollectorEnabled}\n"
+                        + "Cycles Threshold: ${it.collectCyclesThreshold}\n"
+                        + "Autotune: ${it.autotune}\n"
+            )
+        }
+    }
+}
+//endregion

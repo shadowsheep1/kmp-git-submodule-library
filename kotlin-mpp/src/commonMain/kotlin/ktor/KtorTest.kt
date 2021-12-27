@@ -252,3 +252,7 @@ class StatusPresenter(
     }
     //endregion
 }
+
+//region GC
+expect object GarbageCollector
+//endregion

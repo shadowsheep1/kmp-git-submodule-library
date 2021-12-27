@@ -26,3 +26,11 @@ actual fun clientEngine(timeout: Int): HttpClientEngine {
 }
 
 actual typealias WeakRef<T> = java.lang.ref.WeakReference<T>
+
+//region GC
+actual object GarbageCollector {
+    fun collect() {
+        System.gc()
+    }
+}
+//endregion
